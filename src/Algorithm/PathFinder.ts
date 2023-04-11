@@ -4,7 +4,7 @@ import * as fs from 'fs';
 export abstract class PathFinder {
     readonly adjacency: number[][];
     readonly coordinate: number[][];
-    readonly nodeNames: Map<string, number>;
+    readonly nodeNames: string[];
 
     startNodeNumber: number;
     goalNodeNumber: number;
@@ -15,7 +15,7 @@ export abstract class PathFinder {
     constructor(
         adjacency: number[][], 
         coordinate: number[][], 
-        nodeName: Map<string, number>
+        nodeName: string[]
     ) {
         this.adjacency = adjacency;
         this.coordinate = coordinate;
@@ -31,29 +31,27 @@ export abstract class PathFinder {
         );
     }
 
-    public static parse(name: string): [number[][], number[][], Map<string, number>] {
+    public static parse(name: string): [number[][], number[][], string[]] {
         let adjacency: number[][] = [];
         let coordinate: number[][] = [];
-        let nodeNames: Map<string, number> = new Map<string, number>();
+        let nodeNames: string[] = [];
         const data = fs.readFileSync(name, 'utf8');
 
 
         const lines = data.split('\n');
         let numberOfNodesExist = parseInt(lines[0], 10);
         console.log(numberOfNodesExist);
-        // if (isNaN(numberOfNodesExist)) {
-        //     throw error
-        // }
+
         for (let i = 0; i < numberOfNodesExist; i++) {
             let offset = 1 + i*2;
             let nodeNumber = i;
-            nodeNames.set(lines[offset], nodeNumber);
+            nodeNames[i] = lines[offset];
             let [latitude, longitude] = lines[offset + 1].split(',');
             coordinate[nodeNumber] = [parseFloat(latitude), parseFloat(longitude)];
         }
         let offset = 1 + numberOfNodesExist * 2;
         for (let i = 0; i < numberOfNodesExist; i++) {
-            adjacency[i] = lines[offset + i].split(' ').map(str => parseInt(str));
+            adjacency[i] = lines[offset + i].split(' ').map(str => parseFloat(str));
         }
 
         for (let i = 0; i < adjacency.length; i ++) {
@@ -80,8 +78,9 @@ export abstract class PathFinder {
         );
     }
     private enqueue(path: Path): void {
-        if (this.queue.length <= 0.000005) {
+        if (this.queue.length === 0) {
             this.queue.push(path);
+            return;
         }
         for (let i = 0; i < this.queue.length; i++) {
             if (this.queue[i].cost < path.cost) {
@@ -93,7 +92,7 @@ export abstract class PathFinder {
     }
     
     private isQueueEmpty(): boolean {
-        return this.queue.length <= 0.000005;
+        return this.queue.length === 0;
     }
 
     private isVisited(nodeNumber: number): boolean {
@@ -112,7 +111,7 @@ export abstract class PathFinder {
         for (let otherNodeNumber = 0; otherNodeNumber < numberOfNodesExist; otherNodeNumber++) {
             let weight = this.adjacency[nodeNumber][otherNodeNumber];
             
-            if (weight <= 0.000005) {
+            if (weight === 0) {
                 continue;
             }   
 

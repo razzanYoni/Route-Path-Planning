@@ -2,13 +2,18 @@ import { PathFinder, Path } from './PathFinder';
 
 export class AStar extends PathFinder {
   readonly earthRadius = 6371;
+  heuristic : number[];
 
   constructor(
     adjacency: number[][], 
     coordinate: number[][],
-    nodeName: Map<string, number>
+    nodeName: string[]
   ) {
     super(adjacency, coordinate, nodeName);
+    this.heuristic = [];
+    for (let i = 0; i < adjacency.length; i++) {
+      this.heuristic[i] = 0;
+    }
   }
 
   private static toRadians(degrees: number) {
@@ -32,7 +37,11 @@ export class AStar extends PathFinder {
       *Math.sin(longitudeDifference / 2) 
       *Math.sin(longitudeDifference / 2));
 
-    return path.cost 
+    this.heuristic[nodeNumberToExpand] = heuristicCost;
+    let oldHeuristic = this.heuristic[path.top.number];
+
+    return path.cost
+      - oldHeuristic
       + this.adjacency[nodeNumberToExpand][path.top.number]
       + heuristicCost;
   }
