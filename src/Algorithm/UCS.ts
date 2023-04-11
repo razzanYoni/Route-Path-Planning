@@ -11,6 +11,6 @@ export class UCS extends PathFinder {
 
   cost(path: Path, nodeNumberToExpand: number): number {
     return path.cost 
-      + this.adjacency[nodeNumberToExpand][path.top.number];
+      + this.adjacency[path.top.number][nodeNumberToExpand];
   }
 }

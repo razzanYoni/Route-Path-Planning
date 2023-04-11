@@ -16,7 +16,7 @@ export class AStar extends PathFinder {
     }
   }
 
-  private static toRadians(degrees: number) {
+  private static toRadians(degrees: number): number {
     return degrees * (Math.PI / 180);
   }
 
@@ -28,21 +28,25 @@ export class AStar extends PathFinder {
 
     const latitudeDifference = AStar.toRadians(nodeLatitude - goalLatitude);
     const longitudeDifference = AStar.toRadians(nodeLongitude - goalLongitude);
+    
 
-    let heuristicCost =  
+    let c : number =  
       Math.sin(latitudeDifference / 2) * Math.sin(latitudeDifference / 2) 
       + 
       (Math.cos(AStar.toRadians(nodeLatitude)) 
       *Math.cos(AStar.toRadians(goalLatitude)) 
       *Math.sin(longitudeDifference / 2) 
       *Math.sin(longitudeDifference / 2));
+      
+    let heuristicCost = 2 * this.earthRadius * Math.asin(Math.sqrt(c));
+
 
     this.heuristic[nodeNumberToExpand] = heuristicCost;
     let oldHeuristic = this.heuristic[path.top.number];
 
     return path.cost
       - oldHeuristic
-      + this.adjacency[nodeNumberToExpand][path.top.number]
+      + this.adjacency[path.top.number][nodeNumberToExpand]
       + heuristicCost;
   }
 }

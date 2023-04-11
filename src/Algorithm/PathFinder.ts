@@ -83,7 +83,7 @@ export abstract class PathFinder {
             return;
         }
         for (let i = 0; i < this.queue.length; i++) {
-            if (this.queue[i].cost < path.cost) {
+            if (this.queue[i].cost > path.cost) {
                 this.queue.splice(i, 0, path);
                 return;
             }
