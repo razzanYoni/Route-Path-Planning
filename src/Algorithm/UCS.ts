@@ -4,7 +4,7 @@ export class UCS extends PathFinder {
   constructor(
     adjacency: number[][], 
     coordinate: number[][],
-    nodeName: Map<string, number>
+    nodeName: string[]
   ) {
     super(adjacency, coordinate, nodeName);
   }
