@@ -29,6 +29,9 @@ Pastikan telah diinstal requirement berikut pada perangkat anda
 3. Install seluruh *dependencies* dengan memasukkan perintah ```yarn```
 4. Jalankan program pada *development* server dengan memasukkan ```npm start```
 
+##  Disclaimer 
+Agar solusi yang dihasilkan algoritma A* benar pastikan input yang dimasukkan konsisten yaitu dari *weight* dari suatu edge (dalam km) >= haversine distance kedua node yang dihubungkannya.
+
 ## Acknowledgements
 
 - This project is spearheaded by the IF2211 Informatics major at Institut Teknologi Bandung, which has been well organized by the IF2211 - 2023 professors and assistants.
