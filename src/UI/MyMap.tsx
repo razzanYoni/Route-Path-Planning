@@ -116,12 +116,15 @@ export function MyMap() {
                         overflow={"hidden"}
                     >Input Section</Text>
 
-
-                    <FileInput
+                    {map ?
+                        <FileInput
+                        map={map}
                         pathFile={pathFile}
                         setPathFile={setPathFile}
+                        positions={positions}
                         setPositions={setPositions}/>
-
+                    : null}
+                    
                     <FormLabel
                         fontSize="lg"
                         fontWeight="bold"
@@ -168,7 +171,7 @@ export function MyMap() {
                         overflow={"hidden"}
                     >Pilih Algoritma</Text>
 
-                    { map ? <AlgorithmInput map={map} positions={positions} startNode={startNode} goalNode={goalNode} algorithm={algorithm} setAlgorithm={setAlgorithm} pathFile={pathFile} /> : null }
+                    { map ? <AlgorithmInput map={map} positions={positions} startNode={startNode} goalNode={goalNode} algorithm={algorithm} setAlgorithm={setAlgorithm} pathFile={pathFile} setResult={setResult} /> : null }
 
                     <Text
                         fontSize="lg"
@@ -182,8 +185,9 @@ export function MyMap() {
                         overflow={"hidden"}
                         marginTop={{ base: "15px", md: "20px" }}
                     >Output Section</Text>
-
-                    <ResultOutput result={result} setResult={setResult} />
+                    { map ?
+                    <ResultOutput map ={map} result={result} setResult={setResult} positions={positions}/>
+                    : null }
 
                 </VStack>
 

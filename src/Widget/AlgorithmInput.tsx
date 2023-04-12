@@ -2,12 +2,14 @@ import { Dispatch, SetStateAction, useCallback, ChangeEvent } from "react";
 import { Position } from "../Interface/Position";
 import {HStack, Radio, RadioGroup, Button, VStack} from "@chakra-ui/react";
 
-export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm, setAlgorithm, pathFile} : {
+export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm, setAlgorithm, pathFile, setResult} : {
     map: L.Map,
     positions: Array<Position>,
     startNode : [lat : number, lon : number] | null,
     goalNode : [lat : number, lon : number] | null, algorithm : string,
-    setAlgorithm : Dispatch<SetStateAction<string>>, pathFile : string}) {
+    setAlgorithm : Dispatch<SetStateAction<string>>, pathFile : string
+    setResult : Dispatch<SetStateAction<string>>
+}) {
 
     const onChangeAlgorithm = useCallback((nextValue : string) => {
         setAlgorithm(nextValue);
@@ -18,6 +20,13 @@ export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm,
         console.log(algorithm);
         if (startNode && goalNode && pathFile) {
             // TODO : start algorithm dan cek apakah sudah ada path
+            if (algorithm === "UCS") {
+                console.log("UCS");
+                setResult("UCS");
+            } else{
+                console.log("A*");
+                setResult("A*");
+            }
         }
     }, [startNode, goalNode]);
 

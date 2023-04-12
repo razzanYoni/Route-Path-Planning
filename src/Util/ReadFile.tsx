@@ -1,15 +1,10 @@
-import * as fs from "fs"
+import {Position} from "../Interface/Position";
+// import * as fileReader from "react-file-reader"
 
-export function ReadFile(path: string): string {
-    return fs.readFileSync(path, "utf8");
-}
-
-export function parse(name: string): [number[][], number[][], string[]] {
+export function parse(data: string): Array<Position> {
     let adjacency: number[][] = [];
     let coordinate: number[][] = [];
     let nodeNames: string[] = [];
-    const data = fs.readFileSync(name, 'utf8');
-
 
     const lines = data.split('\n');
     let numberOfNodesExist = parseInt(lines[0], 10);
@@ -33,8 +28,14 @@ export function parse(name: string): [number[][], number[][], string[]] {
     for (let i = 0; i < coordinate.length; i ++) {
         console.log(coordinate[i].join("\t"));
     }
-    return [adjacency, coordinate, nodeNames];
-    
-}
+    console.log(nodeNames);
 
-export default ReadFile;
+    let positions: Position[] = [];
+    for (let i = 0; i < numberOfNodesExist; i++) {
+        positions[i] = {id: i, addr: nodeNames[i], lat: coordinate[i][0], lon: coordinate[i][1], adj: adjacency[i]};
+    }
+    console.log("yang ini ")
+    console.log(positions);
+
+    return positions;
+}
