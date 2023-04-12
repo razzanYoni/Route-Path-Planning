@@ -1,11 +1,3 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
-
-<img
-  src="assets/app-preview.png"
-  alt="Treasure Hunt App by Bebas"
-  style="display: inline-block; margin: 0 auto; width: 100%; max-width:800; padding: 0;">
-
 # Pengaplikasian Algoritma UCS dan A* dalam Mencari Rute Terpendek antara 2 Titik Pada Peta
 
 Dalam tugas kecil ini, akan dipecahkan persoalan pencarian jalur terpendek antara dua titik pada peta. Algoritma yang digunakan dalam pemecahan persoalaan adalah algoritma *uniform cost search* dan algoritma A*. Penjelelasan lebih detil terkait tugas kecil ini, latar belakang, dan penjelasan algoritma dapat dilihat pada laporan di folder `doc`. 
