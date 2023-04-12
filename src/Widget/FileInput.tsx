@@ -1,8 +1,14 @@
 import {Input, InputProps, useMultiStyleConfig} from "@chakra-ui/react";
 import * as React from "react";
 import {Dispatch, SetStateAction, useCallback} from "react";
+import {parse} from "../Util/ReadFile";
+import {Position} from "../Interface/Position";
 
-export function FileInput({pathFile, setPathFile} : {pathFile: string| null, setPathFile : Dispatch<SetStateAction<string>>}) {
+export function FileInput({pathFile, setPathFile, setPositions} : {
+    pathFile: string| null,
+    setPathFile : Dispatch<SetStateAction<string>>,
+    setPositions : Dispatch<SetStateAction<Array<Position>>>
+}) {
 
     const InputFile = (props: InputProps) => {
         const styles = useMultiStyleConfig("Button", { variant: "outline", hover: "none" });
@@ -20,10 +26,10 @@ export function FileInput({pathFile, setPathFile} : {pathFile: string| null, set
                         border: "none",
                         outline: "none",
                         alignContent: "center",
-                        height: { base: "2vh", md: "4vh" },
-                        width: { base: "2vw", md: "10vw" },
-                        mt: 2,
-                        mr: 2,
+                        height: { base: "1vh", md: "4vh" },
+                        width: { base: "50vw", md: "10vw" },
+                        mt: { base: "0vh", md: "1vh" },
+                        mr: { base: "5vw", md: "1vw" },
                         ...styles,
                     },
                 }}
@@ -36,6 +42,7 @@ export function FileInput({pathFile, setPathFile} : {pathFile: string| null, set
         if (event.target.files) {
             setPathFile(event.target.files[0].name)
             // TODO add file reader
+            setPositions(parse(event.target.files[0].name))
         }
     }, [setPathFile])
 
@@ -44,7 +51,7 @@ export function FileInput({pathFile, setPathFile} : {pathFile: string| null, set
             colorScheme={"teal"}
             onChange={onChangeFile}
             height={{base: "5vh", md: "7vh"}}
-            width={{base: "40vw", md: "97%"}}
+            width={{base: "95vw", md: "97%"}}
         />
     )
 }

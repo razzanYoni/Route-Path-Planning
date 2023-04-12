@@ -17,18 +17,16 @@ import * as L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents, useMapEvent, useMap, ZoomControl, ScaleControl, LayersControl, } from 'react-leaflet'
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import "leaflet/dist/leaflet.css"
-import iconMarker from "./iconMarker";
+import iconMarker from "./Icon/iconMarker";
 import {LatLng, map} from "leaflet";
 import {ResetButton} from "./Widget/ResetButton";
 import {MapComponent} from "./UI/MapComponent";
 import {FileInput} from "./Widget/FileInput";
-import {Position} from "./Interface/Position";
 import {MyMap} from "./UI/MyMap";
 
 // TODO : input file, input node, remove all nodes, add polyline
 
 // initial position for the map attribute : id, lat, lon, arr of adjacent id
-let initialPosition: Array<Position> = []
 
 
 function AddPolyLine( {map, coordinates} : {map: L.Map, coordinates : number[][]} ) {

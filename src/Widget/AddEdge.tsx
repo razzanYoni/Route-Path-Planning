@@ -1,61 +1,59 @@
-import React, { useCallback, useState } from "react";
+import React, {cloneElement, Dispatch, SetStateAction, useCallback, useState} from "react";
 import { Button, HStack, Select } from "@chakra-ui/react";
 import { Polyline } from "react-leaflet";
 import { Position } from "../Interface/Position";
-import { polyline } from "leaflet";
+import * as L from "leaflet";
+import {config} from "../UI/config";
+import cloneDeep from "lodash/cloneDeep";
 
 
-// TODO : side effect
-interface AddEdgeProps {
-    map: L.Map;
-    positions: Array<Position>;
-    setPositions: React.Dispatch<React.SetStateAction<Position[]>>;
-}
+export function AddEdge({ map, positions, setPositions }: {
+    map: L.Map,
+    positions: Array<Position>,
+    setPositions: Dispatch<SetStateAction<Array<Position>>>}) {
+    let [node1, setNode1] = useState<Position>();
+    let [node2, setNode2] = useState<Position>();
 
-export function AddEdge({ map, positions, setPositions }: AddEdgeProps) {
-    let [node1Id, setNode1Id] = useState<number>();
-    let [node2Id, setNode2Id] = useState<number>();
 
-    const getNodeById = (id: number) => {
-        return positions.find((node) => node.id === id);
-    };
-
-    // resolve the side effect
-    function onChangeNode1(e: any) {
-        setNode1Id(prevNode => parseInt(e.target.value));
+    function onChangeNode1(e: React.ChangeEvent<HTMLSelectElement>) {
+        setNode1(positions.filter((node) => node.id === parseInt(e.target.value))[0]);
     }
 
     function onChangeNode2(e: React.ChangeEvent<HTMLSelectElement>) {
-        setNode2Id(prevNode => parseInt(e.target.value));
+        setNode2(positions.filter((node) => node.id === parseInt(e.target.value))[0]);
     }
 
-    const onClick = useCallback(() => {
-        if (node1Id && node2Id) {
-            const node1 = getNodeById(node1Id);
-            const node2 = getNodeById(node2Id);
+    function onClick() {
+        console.log("add edge")
+        if (node1 && node2) {
 
             if (node1 && node2 && node1 !== node2) {
                 const id1 = node1.id;
                 const id2 = node2.id;
 
-                setPositions((prevPositions) => {
-                    const newPositions = prevPositions.map((node) => {
+                L.polyline([[node1.lat, node1.lon], [node2.lat, node2.lon]], { color: "red" }).addTo(map);
+
+                setPositions((prevPositions : any) => {
+                    const newPositions = prevPositions.map((node : any) => {
                         if (node.id === id1) {
-                            return { ...node, adj: node.adj ? [...node.adj, id2] : [id2] };
-                        } else if (node.id === id2) {
-                            return { ...node, adj: node.adj ? [...node.adj, id1] : [id1] };
+                            return { ...node, adj: node.adj === undefined ? [id2] : ((node.adj.indexOf(id2) === -1) ? [...node.adj, id2] : [...node.adj]) };
+                        }
+                        if (node.id === id2) {
+                            return { ...node, adj: node.adj === undefined ? [id1] : ((node.adj.indexOf(id1) === -1) ? [...node.adj, id1] : [...node.adj]) };
                         }
                         return node;
                     });
                     return newPositions;
                 });
 
-                // polyline([node1, node2], {color: "red"}).addTo(map);
+                console.log("positions", positions);
             } else {
                 alert("Invalid edge");
             }
+        } else {
+            alert("Please select two nodes");
         }
-    }, [node1Id, node2Id, positions, setPositions]);
+    };
 
     const nodeOptions = positions.map((node) => (
         <option key={node.id} value={node.id}>

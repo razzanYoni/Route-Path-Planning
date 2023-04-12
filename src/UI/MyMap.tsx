@@ -5,7 +5,6 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents, useMapE
 import { ColorModeSwitcher } from "../ColorModeSwitcher"
 import "leaflet/dist/leaflet.css"
 import {config} from "./config";
-import {Position} from "../Interface/Position";
 import {MapComponent} from "./MapComponent";
 import {ResetButton} from "../Widget/ResetButton";
 import {AddEdge} from "../Widget/AddEdge";
@@ -14,6 +13,8 @@ import {InputNode} from "../Widget/InputNode";
 import {Flex, ChakraProvider, theme, Stack, VStack, Button, Textarea, FormLabel, Text} from "@chakra-ui/react";
 import {AlgorithmInput} from "../Widget/AlgorithmInput";
 import * as path from "path";
+import {Position} from "../Interface/Position";
+import {ResultOutput} from "../Widget/Output";
 
 
 function MapPlaceholder() {
@@ -25,16 +26,21 @@ function MapPlaceholder() {
     )
 }
 
+const initialResult = "Result will be shown here";
+
+// file handling
+// tampilin ke map
 
 export function MyMap() {
 
     const [map, setMap] = useState<L.Map | null>(null);
+    // const [positions, setPositions] = useState<Array<{id: number, lat: number, lon: number, adj: Array<number>}>>([]);
     const [positions, setPositions] = useState<Array<Position>>([]);
-    // TODO : pathFile bisa langsung graph atau mau file
     const [pathFile, setPathFile] = useState<string>("");
     const [startNode, setStartNode] = useState<[lat : number, lon : number] | null>(null);
     const [goalNode, setGoalNode] = useState<[lat : number, lon : number] | null>(null);
     const [algorithm, setAlgorithm] = useState<string>("A*");
+    const [result, setResult] = useState<string>(initialResult);
 
     const displayMap = useMemo(() => (
         <MapContainer
@@ -85,7 +91,7 @@ export function MyMap() {
                     align={"stretch"}
                     justifyContent={"center"}
                     w={{ base: "100%", md: "50%" }}
-                    h={{ base: "100%", md: "100%" }}
+                    h={{ base: "60vh", md: "100%" }}
                 >
                     {displayMap}
                     {map ? <ResetButton map={map} setPositions={setPositions} /> : null}
@@ -112,7 +118,9 @@ export function MyMap() {
 
 
                     <FileInput
-                        pathFile={pathFile} setPathFile={setPathFile} />
+                        pathFile={pathFile}
+                        setPathFile={setPathFile}
+                        setPositions={setPositions}/>
 
                     <FormLabel
                         fontSize="lg"
@@ -175,8 +183,7 @@ export function MyMap() {
                         marginTop={{ base: "15px", md: "20px" }}
                     >Output Section</Text>
 
-
-
+                    <ResultOutput result={result} setResult={setResult} />
 
                 </VStack>
 

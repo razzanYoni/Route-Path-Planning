@@ -5,7 +5,9 @@ import * as React from "react"
 import {config} from "../UI/config";
 import {Position} from "../Interface/Position";
 
-export function ResetButton({map,  setPositions} : { map: L.Map, setPositions: React.Dispatch<React.SetStateAction<Position[]>>}) {
+export function ResetButton({map, setPositions} : {
+    map: L.Map,
+    setPositions: React.Dispatch<React.SetStateAction<Array<Position>>>}) {
 
     const [isRemoveAll, setIsRemoveAll] = useState(false)
 

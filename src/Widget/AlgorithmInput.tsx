@@ -1,8 +1,13 @@
 import { Dispatch, SetStateAction, useCallback, ChangeEvent } from "react";
 import { Position } from "../Interface/Position";
-import {HStack, Radio, RadioGroup, IconButton, Button, VStack} from "@chakra-ui/react";
+import {HStack, Radio, RadioGroup, Button, VStack} from "@chakra-ui/react";
 
-export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm, setAlgorithm, pathFile} : { map: L.Map, positions: Array<Position>, startNode : [lat : number, lon : number] | null, goalNode : [lat : number, lon : number] | null, algorithm : string, setAlgorithm : Dispatch<SetStateAction<string>>, pathFile : string}) {
+export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm, setAlgorithm, pathFile} : {
+    map: L.Map,
+    positions: Array<Position>,
+    startNode : [lat : number, lon : number] | null,
+    goalNode : [lat : number, lon : number] | null, algorithm : string,
+    setAlgorithm : Dispatch<SetStateAction<string>>, pathFile : string}) {
 
     const onChangeAlgorithm = useCallback((nextValue : string) => {
         setAlgorithm(nextValue);
@@ -17,18 +22,33 @@ export function AlgorithmInput({ map, positions, startNode, goalNode, algorithm,
     }, [startNode, goalNode]);
 
     return (
-        <VStack>
+        <VStack
+            width={{base: "100%", md: "97%"}}
+            justifyContent={"center"}
+            alignItems={"center"}
+            justify={"center"}
+            align={"center"}
+        >
             <HStack
                 spacing={4}
-                w={"97%"}
+                w={"100%"}
             >
                 <RadioGroup
+                    width={"120%"}
                     defaultValue={"UCS"}
                     id={"algorithm"}
                     onChange={onChangeAlgorithm}
                     value={algorithm}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    alignContent={"center"}
                 >
-                    <HStack>
+                    <HStack
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        alignContent={"center"}
+                        w = {"97%"}
+                    >
                         <Radio value={"UCS"}>UCS</Radio>
                         <Radio value={"A*"}>A*</Radio>
                     </HStack>

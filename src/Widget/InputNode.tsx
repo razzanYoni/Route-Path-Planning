@@ -2,7 +2,11 @@ import React, {useState, useCallback, Dispatch, SetStateAction} from 'react';
 import {HStack, Select} from "@chakra-ui/react";
 import {Position} from "../Interface/Position";
 
-export function InputNode({ map, positions, setStartNode, setGoalNode } : { map: L.Map, positions: Array<Position>, setStartNode : Dispatch<SetStateAction<[lat : number, lon : number] | null>>, setGoalNode : Dispatch<SetStateAction<[lat : number, lon : number] | null>>
+export function InputNode({ map, positions, setStartNode, setGoalNode } : {
+    map: L.Map,
+    positions: Array<Position>,
+    setStartNode : Dispatch<SetStateAction<[lat : number, lon : number] | null>>,
+    setGoalNode : Dispatch<SetStateAction<[lat : number, lon : number] | null>>
 }) {
 
     const onChangeStartNode = useCallback((e : React.ChangeEvent<HTMLSelectElement>) => {
@@ -12,7 +16,7 @@ export function InputNode({ map, positions, setStartNode, setGoalNode } : { map:
         } else {
             setStartNode(null);
         }
-        // TODO : set marker to red
+
     }, [positions]);
 
     const onChangeGoalNode = useCallback((e : React.ChangeEvent<HTMLSelectElement>) => {
@@ -22,7 +26,7 @@ export function InputNode({ map, positions, setStartNode, setGoalNode } : { map:
         } else {
             setGoalNode(null);
         }
-        // TODO : set marker to green
+
     }, [positions]);
 
     return (
