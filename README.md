@@ -9,6 +9,12 @@ Dalam tugas kecil ini, akan dipecahkan persoalan pencarian jalur terpendek antar
 | 13521056 | Daniel Egiant Sitanggang |
 | 13521087 | Razzan Daksana Yoni      |
 
+## Requirement
+Pastikan telah diinstal requirement berikut pada perangkat anda
+- npm
+- yarn 
+- typescript (npm)
+
 ## About this project
 
 - Menyelesaikan perosalan pencarian jalur terpendek dari dua titik pada maps
@@ -20,7 +26,7 @@ Dalam tugas kecil ini, akan dipecahkan persoalan pencarian jalur terpendek antar
 1. Clone repository ini dengan memasukkan 
    ```git clone https://github.com/razzanYoni/Tucil3_13521056_13521087 ```  pada git bash
 2. Buka terminal pada root directory dari repository yang telah di clone
-3. Install seluruh *dependencies* dengan memasukkan ```npm run build```
+3. Install seluruh *dependencies* dengan memasukkan perintah ```yarn```
 4. Jalankan program pada *development* server dengan memasukkan ```npm start```
 
 ## Acknowledgements
