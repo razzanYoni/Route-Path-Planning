@@ -190,7 +190,7 @@ export class Path {
             seq = seq.next;
         }
     
-        return arrResult.join();
+        return arrResult.join("->");
     }
 }
 

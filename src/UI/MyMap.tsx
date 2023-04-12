@@ -36,10 +36,12 @@ export function MyMap() {
     const [map, setMap] = useState<L.Map | null>(null);
     // const [positions, setPositions] = useState<Array<{id: number, lat: number, lon: number, adj: Array<number>}>>([]);
     const [positions, setPositions] = useState<Array<Position>>([]);
+    const [dataFile, setDataFile] = useState<string>("");
     const [pathFile, setPathFile] = useState<string>("");
     const [startNode, setStartNode] = useState<[lat : number, lon : number] | null>(null);
     const [goalNode, setGoalNode] = useState<[lat : number, lon : number] | null>(null);
     const [algorithm, setAlgorithm] = useState<string>("A*");
+    const [resultMatrix, setResultMatrix] = useState<[number[][], number[][], string[]] >([[[]], [[]], [""]]);
     const [result, setResult] = useState<string>(initialResult);
 
     const displayMap = useMemo(() => (
@@ -69,7 +71,7 @@ export function MyMap() {
                 imperial={false}
                 metric={true}
             />
-            { map ? <MapComponent map={map} positions={positions} setPositions={setPositions}/> : null }
+            {/* { map ? <MapComponent map={map} positions={positions} setPositions={setPositions}/> : null } */}
         </MapContainer>
     ), [map, positions])
 
@@ -118,11 +120,14 @@ export function MyMap() {
 
                     {map ?
                         <FileInput
+                        setResultMatrix={setResultMatrix}
                         map={map}
-                        pathFile={pathFile}
-                        setPathFile={setPathFile}
+                        setDataFile={setDataFile}
                         positions={positions}
-                        setPositions={setPositions}/>
+                        setPositions={setPositions}
+                        setPathFile={setPathFile}
+                        pathFile={pathFile}
+                        />
                     : null}
                     
                     <FormLabel
@@ -142,7 +147,8 @@ export function MyMap() {
                         setStartNode={setStartNode}
                         setGoalNode={setGoalNode}
                     /> : null }
-                    <FormLabel
+
+                    {/* <FormLabel
                         fontSize="lg"
                         fontWeight="bold"
                         color="teal.500"
@@ -157,7 +163,7 @@ export function MyMap() {
                         map={map}
                         positions={positions}
                         setPositions={setPositions}
-                    /> : null }
+                    /> : null } */}
 
                     <Text
                         fontSize="lg"
@@ -171,7 +177,7 @@ export function MyMap() {
                         overflow={"hidden"}
                     >Pilih Algoritma</Text>
 
-                    { map ? <AlgorithmInput map={map} positions={positions} startNode={startNode} goalNode={goalNode} algorithm={algorithm} setAlgorithm={setAlgorithm} pathFile={pathFile} setResult={setResult} /> : null }
+                    { map ? <AlgorithmInput map={map} resultMatrix={resultMatrix} positions={positions} startNode={startNode} goalNode={goalNode} algorithm={algorithm} setAlgorithm={setAlgorithm} dataFile={dataFile} setResult={setResult} /> : null }
 
                     <Text
                         fontSize="lg"
