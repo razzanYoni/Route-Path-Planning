@@ -25,6 +25,7 @@ export function FileInput({map, setResultMatrix, setDataFile, positions, setPosi
                 accept={".txt"}
                 width={"100%"}
                 multiple={false}
+                placeholder="Choose file"
                 // justifyContent={"space-between"}
                 // alignContent={"center"}
                 sx={{
