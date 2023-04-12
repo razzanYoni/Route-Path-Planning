@@ -1,59 +1,29 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# Pengaplikasian Algoritma UCS dan A* dalam Mencari Rute Terpendek antara 2 Titik Pada Peta
 
-## Available Scripts
+Dalam tugas kecil ini, akan dipecahkan persoalan pencarian jalur terpendek antara dua titik pada peta. Algoritma yang digunakan dalam pemecahan persoalaan adalah algoritma *uniform cost search* dan algoritma A*. Penjelelasan lebih detil terkait tugas kecil ini, latar belakang, dan penjelasan algoritma dapat dilihat pada laporan di folder `doc`. 
 
-In the project directory, you can run:
+## Group Members
 
-### `npm start`
+| NIM      | Name                     |
+| -------- | ------------------------ |
+| 13521056 | Daniel Egiant Sitanggang |
+| 13521087 | Razzan Daksana Yoni      |
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About this project
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+- Menyelesaikan perosalan pencarian jalur terpendek dari dua titik pada maps
+- GUI diplay diimplementasikan dengan react
+- Input dapat berupa file dengan contoh pada folder `test` atau dengan membuat node secara manual dengan mengklik 
 
-### `npm test`
+## Setup
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+1. Clone repository ini dengan memasukkan 
+   ```git clone https://github.com/razzanYoni/Tucil3_13521056_13521087 ```  pada git bash
+2. Buka terminal pada root directory dari repository yang telah di clone
+3. Install seluruh *dependencies* dengan memasukkan ```npm run build```
+4. Jalankan program pada *development* server dengan memasukkan ```npm start```
 
-### `npm run build`
+## Acknowledgements
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
-
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
-
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- This project is spearheaded by the IF2211 Informatics major at Institut Teknologi Bandung, which has been well organized by the IF2211 - 2023 professors and assistants.
+- README template by [@flynerdpl](https://www.flynerd.pl/): [README](https://github.com/ritaly/README-cheatsheet)
