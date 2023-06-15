@@ -11,9 +11,8 @@ Dalam tugas kecil ini, akan dipecahkan persoalan pencarian jalur terpendek antar
 
 ## Requirement
 Pastikan telah diinstal requirement berikut pada perangkat anda
-- npm
-- yarn 
-- typescript (npm)
+- npm 
+- typescript (node js)
 
 ## About this project
 
@@ -26,8 +25,8 @@ Pastikan telah diinstal requirement berikut pada perangkat anda
 1. Clone repository ini dengan memasukkan 
    ```git clone https://github.com/razzanYoni/Tucil3_13521056_13521087 ```  pada git bash
 2. Buka terminal pada root directory dari repository yang telah di clone
-3. Install seluruh *dependencies* dengan memasukkan perintah ```yarn```
-4. Jalankan program pada *development* server dengan memasukkan ```npm start```
+3. Install seluruh *dependencies* dengan memasukkan perintah ```npm install```
+5. Jalankan program pada *development* server dengan memasukkan ```npm start```
 
 ##  Disclaimer 
 Agar solusi yang dihasilkan algoritma A* benar pastikan input yang dimasukkan konsisten yaitu dari *weight* dari suatu edge (dalam km) >= haversine distance kedua node yang dihubungkannya.
